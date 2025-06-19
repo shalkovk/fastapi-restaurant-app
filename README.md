@@ -51,7 +51,6 @@ docker-compose up --build -d
 После установки docker образа и контейнеров, в терминале необходимо выполнить команды по очереди:
 
 - `docker exec -it fastapi-restaurant-app bash`
-- `alembic init alembic`
 - `alembic revision --autogenerate -m 'init migrations'`
 - `alembic upgrade head`
 

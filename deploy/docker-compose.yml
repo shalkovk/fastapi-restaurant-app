@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: fastapi-restaurant-app
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../.env:/app/.env
+    env_file:
+      - ../.env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    container_name: postgres-restaurant-db
+    restart: always
+    ports:
+      - "5438:5432"
+    environment:
+      POSTGRES_DB: restaurant_app
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
